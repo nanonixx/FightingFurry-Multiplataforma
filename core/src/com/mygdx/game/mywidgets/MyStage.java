@@ -17,7 +17,7 @@ public class MyStage extends Stage {
 
         table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+//        table.setDebug(true);
 
         topLeft = new VerticalGroup().space(space);
         topCenter = new VerticalGroup().space(space);
