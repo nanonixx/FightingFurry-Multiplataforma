@@ -28,7 +28,6 @@ public class MyScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage = new MyStage(viewport));
         table = new Table();
-
     }
     public void setScreen(MyScreen screen){
         Gdx.input.setInputProcessor(screen.stage);
