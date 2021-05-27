@@ -1,7 +1,8 @@
 package com.company.server;
 
+
 import com.company.model.Mensaje;
-import com.company.server.juego.Juego;
+import com.company.server.game.Juego;
 import com.google.gson.Gson;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
@@ -9,15 +10,22 @@ import jakarta.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/", encoders = ServidorEndpoint.MyEncoder.class, decoders = ServidorEndpoint.MyDecoder.class)
 public class ServidorEndpoint {
     static Gson gson = new Gson();
-    static Juego juego = new Juego();
+    static Juego juego;
+    boolean firstOpen = true;
 
-    public ServidorEndpoint() {}
+    public ServidorEndpoint() {
+        juego = new Juego();
+    }
 
     @OnOpen
     public void onOpen(Session cliente) {
-        System.out.println("NEW CLIENT: " + cliente.getId());
-        juego.onOpen(cliente);
+        if (firstOpen) {
+            System.out.println("FIRST OPEN");
+            juego = new Juego();
+            firstOpen = false;
+        }
     }
+
 
     @OnMessage
     public void onMessage(Session cliente, Mensaje mensaje) {
@@ -25,17 +33,6 @@ public class ServidorEndpoint {
         juego.onMessage(cliente, mensaje);
     }
 
-    @OnClose
-    public void onClose(Session cliente) {
-        System.out.println("CLOSED CONNECTION " + cliente.getId());
-        juego.onClose(cliente);
-    }
-
-    @OnError
-    public void onError(Session session, Throwable throwable) {
-        System.out.println("ERROR FROM " + session.getId()  +" : " + throwable.getMessage());
-        juego.onError(session);
-    }
 
     public static class MyEncoder implements Encoder.Text<Mensaje> {
         @Override
@@ -67,5 +64,5 @@ public class ServidorEndpoint {
             return (s != null);
         }
     }
-}
 
+}

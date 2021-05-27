@@ -1,11 +1,25 @@
 package com.mygdx.game;
 
+
 import com.badlogic.gdx.Game;
+import com.mygdx.game.Config.BaseScreen;
+import com.mygdx.game.Objects.Juego;
 
 public class MyGdxGame extends Game {
 
+	Assets assets;
+
 	@Override
 	public void create () {
-		setScreen(new LoadScreen(MyGdxGame.this));
+
+
+		Cosingas.juego = new Juego(this);
+		assets = new Assets();
+		assets.load();
+		setScreen(new LoadingScreen(this));
+	}
+
+	public BaseScreen getBaseScreen(){
+		return (BaseScreen) getScreen();
 	}
 }

@@ -8,14 +8,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 public class Assets extends AssetManager {
 
+    //TexturePacker: para crear atlas
+
     public static TextureAtlas atlas;
 
     public void load(){
         load("miatles.atlas", TextureAtlas.class);
     }
 
-    @Override
-    public synchronized boolean update() {
+    @Override public synchronized boolean update(){
         boolean update = super.update();
 
         if(update){
@@ -24,12 +25,9 @@ public class Assets extends AssetManager {
         return update;
     }
 
-    public static Animation<TextureRegion> getAnimation(String name, float time, Animation.PlayMode playMode){
-        return new Animation<>(time, atlas.findRegions(name), playMode);
-    }
 
-    public static TextureRegion getTexture(String name){
-        return atlas.findRegion(name);
+    public static Animation<TextureRegion> getAnimation(String name, float time, Animation.PlayMode playMode){
+        return new Animation<TextureRegion>(time, atlas.findRegions(name), playMode);
     }
 
     public static TextureRegionDrawable getDrawable(String name){
