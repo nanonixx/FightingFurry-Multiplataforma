@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 //import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -26,6 +27,16 @@ public class OptionsScreen extends BaseScreen {
 
         BaseImageButton buttonDone = new BaseImageButton("button/done.png", "button/done_botonado.png", 166, 81, 558, 100);
 
+        BaseImageButton buttonBack = new BaseImageButton("button/atras.png", "button/atras_botonado.png", 75, 75, 4, 639);
+        stage.addActor(buttonBack);
+
+        buttonBack.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                setScreen(new PantallaInicial(game));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
         buttonDone.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -46,7 +57,7 @@ public class OptionsScreen extends BaseScreen {
 
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
 //        style.font = generator.generateFont(parameter);
-//        style.font = new BitmapFont();
+        style.font = new BitmapFont();
 
 //        "button/inputField.png"
         style.fontColor = Color.BLACK;

@@ -15,17 +15,21 @@ import com.mygdx.game.Config.MyStage;
 import com.mygdx.game.Objects.Gatito;
 import com.mygdx.game.Objects.Mano;
 
+import com.badlogic.gdx.audio.Sound;
+
 
 
 public class SelectionScreen extends BaseScreen {
 
     private boolean selected = false;
     private Texture background;
+
     Image pj = new Image();
     Image cartel = new Image();
     private String pjSeleccionado = null;
     String mantenerSeleccionado;
     Sound selectSound;
+    Sound selectedSound;
 
     public SelectionScreen(MyGdxGame game) {
         super(game);
@@ -56,16 +60,30 @@ public class SelectionScreen extends BaseScreen {
         background = new Texture("fondaso.png");
 
         selectSound = Gdx.audio.newSound(Gdx.files.internal("sounds/meow_03.wav"));
+        selectedSound = Gdx.audio.newSound(Gdx.files.internal("sounds/menu_select.ogg"));
 
         BaseImageButton buttonReady = new BaseImageButton("select.png", "select_botonado.png", 190, 90, 805, 54);
         stage.addActor(buttonReady);
+
+        BaseImageButton buttonDone = new BaseImageButton("button/done.png", "button/done_botonado.png", 166, 81, 558, 100);
+
+        BaseImageButton buttonBack = new BaseImageButton("button/atras.png", "button/atras_botonado.png", 75, 75, 4, 639);
+        stage.addActor(buttonBack);
+
+        buttonBack.addListener(new InputListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                setScreen(new PantallaInicial(game));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
 
         //para testeo
         buttonReady.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(pjSeleccionado != null){
-                    selectSound.play(1.0f);
+                    selectedSound.play(1.0f);
                     Cosingas.juego.ready(pjSeleccionado);
                 }
 //                setScreen(new GameScreen(game));
@@ -115,6 +133,7 @@ public class SelectionScreen extends BaseScreen {
                 selected = selectPj(gokuFrame, "goku");
             }
             mantenerSeleccionado = "gokuitot.png";
+            selectSound.play(1.0f);
         });
         furrieFrame.onClick(() -> {
             if (!selected) {
@@ -125,6 +144,7 @@ public class SelectionScreen extends BaseScreen {
                 selected = selectPj(furrieFrame, "furrie");
             }
             mantenerSeleccionado = "curie.png";
+            selectSound.play(1.0f);
         });
         leeFrame.onClick(() -> {
             if (!selected) {
