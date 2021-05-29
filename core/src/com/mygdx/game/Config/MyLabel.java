@@ -2,24 +2,25 @@ package com.mygdx.game.Config;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class MyLabel extends Label {
     static LabelStyle sLabelStyle = new LabelStyle();
+    private static final com.badlogic.gdx.Gdx Gdx = new Gdx();
+
     static {
-//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Pixeled.ttf"));
-//        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-//        parameter.size = 8;
-//        sLabelStyle.font = generator.generateFont(parameter);
+//        sLabelStyle.font = new BitmapFont(com.badlogic.gdx.Gdx.files.internal("fonts/Arial/Arial.fnt"), Gdx.files.internal("fonts/Arial/Arial.png"), false);
+        sLabelStyle.font = new BitmapFont();
+
     }
 
     LabelStyle labelStyle;
 
+
     public MyLabel(){
         super("", sLabelStyle);
-//
+
         labelStyle = new LabelStyle();
         labelStyle.font = new BitmapFont();
 
@@ -36,7 +37,7 @@ public class MyLabel extends Label {
         this(color);
         setText(charSequence);
         setPosition(x, y);
-        setFontScale(2.5f);
+        setFontScale(3f);
     }
 
     public MyLabel(float x, float y, Color color){

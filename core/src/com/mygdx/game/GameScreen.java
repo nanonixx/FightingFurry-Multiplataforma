@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.company.model.Mensaje;
 import com.mygdx.game.Config.BaseImageButton;
 import com.mygdx.game.Config.BaseScreen;
@@ -22,6 +23,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private Texture background = new Texture(Cosingas.juego.bg);
+
 
     Image saludright = new Image(new Texture("hud/salud_right.png"));
     Image saludleft = new Image(new Texture("hud/salud_left.png"));
